@@ -1,0 +1,61 @@
+{% extends 'base/main.html' %}
+{% load static %}
+{% block content %}
+
+<div class="header">
+    <div>
+        <h2>{{request.user|title}}, подойдите к директору, чтобы получить задания </h2>
+        <p>У вас {{count}} незавершенных задач</p>
+    </div>
+    {% if request.user.is_authenticated %}
+    <a href="{% url 'logout' %}">Выйти</a>
+    {% else %}
+    <a href="{% url 'login' %}">Войти</a>
+    {% endif %}
+</div>
+
+
+
+<div class="search">
+    <form method="GET" class="form-search">
+        <input type="text" name="search-area" value="{{ search_input }}">
+        <input class="button" type="submit" value="Поиск">
+    </form>
+</div>
+
+
+
+
+<div class="all-tasks">
+    <div class="center-con">
+        <h3><a class="add-link" href="{% url 'task-create' %}">Добавить задание</a></h3>
+    </div>
+    
+    {% for task in tasks %}
+        <div class="item-task">
+            {% if task.complete %}
+                <div class="task-title">
+                    <div class="task-complete-icon"></div>
+                    <s><a href="{% url 'task-update' task.id %}">{{task}}</a></s>
+                </div>
+                <a class="delete-task" href="{% url 'task-delete' task.id %}">&#215;</a>
+                {% else %}
+
+                <div class="task-title">
+                    <div class="task-incomplete-icon"></div>
+                    <a href="{% url 'task-update' task.id %}">{{task}}</a>
+                </div>
+                <a class="delete-task" href="{% url 'task-delete' task.id %}">&#215;</a>
+            {% endif %}
+            
+        </div>
+    {% empty %}
+    <div class="center-con">
+        <h3>У вас еще нет задания</h3>
+    </div>
+    
+    {% endfor %}
+</div>
+
+
+{% endblock %}

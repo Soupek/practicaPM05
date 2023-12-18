@@ -1,0 +1,18 @@
+{% extends 'base/main.html' %}
+{% load static %}
+{% block content %}
+
+<div class="header">
+    <a href="{% url 'tasks' %}">&#8592; Назад</a>
+</div>
+
+<div class="defolt-con">
+    <form method="post">
+        {% csrf_token %}
+        <p>Вы точно хотите удалить это задание?</p>
+        <p class="delete__task">"{{task}}"</p>
+        <input type="submit" value="Удалить" class="but">
+    </form>
+</div>
+
+{% endblock content %}

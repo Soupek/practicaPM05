@@ -1,0 +1,27 @@
+{% extends 'base/main.html' %}
+{% load static %}
+{% block content %}
+
+<div class="header">
+    <h1>Регистрация</h1>
+</div>
+
+<div class="defolt-con">
+    <form action="" method="post">
+        {% csrf_token %}
+        <label>{{form.username.label}}</label>
+        {{form.username}}
+        <label>{{form.password1.label}}</label>
+        {{form.password1}}
+        <label>{{form.password2.label}}</label>
+        {{form.password2}}
+        <input type="submit" value="Регистрация" class="but" style="margin-top: 20px;">
+    </form>
+</div>
+
+
+<div class="center-con">
+    <P>Уже есть аккаунт?<a href="{% url 'login' %}">Войти</a></P>
+</div>
+
+{% endblock content %}

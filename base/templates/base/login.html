@@ -1,0 +1,23 @@
+{% extends 'base/main.html' %}
+{% load static %}
+
+{% block content %}
+<div class="header">
+    <h1>Вход</h1>
+</div>
+
+<div class="defolt-con">
+    <form action="" method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="Войти" class="but">
+    </form>
+</div>
+
+
+<div class="center-con">
+    <p>Еще не зарегистрированны?  <a href="{% url 'register' %}">Зарегистрироваться</a></p>
+</div>
+
+
+{% endblock %}
